@@ -1,44 +1,61 @@
-def add(a, b):
-    return a + b
+# Student Marks Management System
 
-def subtract(a, b):
-    return a - b
+students = {}
 
-def multiply(a, b):
-    return a * b
+def add_student():
+    name = input("Enter student name: ")
+    marks = float(input("Enter student marks: "))
+    students[name] = marks
+    print("Student added successfully!")
 
-def divide(a, b):
-    try:
-        return a / b
-    except ZeroDivisionError:
-        return "Cannot divide by zero!"
+def display_students():
+    if len(students) == 0:
+        print("No student records found!")
+    else:
+        print("\n--- Student Records ---")
+        for name, marks in students.items():
+            print(name, ":", marks)
 
-print("===== Simple Calculator =====")
-print("1. Addition")
-print("2. Subtraction")
-print("3. Multiplication")
-print("4. Division")
+def search_student():
+    name = input("Enter student name to search: ")
+    if name in students:
+        print("Marks:", students[name])
+    else:
+        print("Student not found!")
 
-try:
-    num1 = float(input("Enter first number: "))
-    num2 = float(input("Enter second number: "))
+def calculate_average():
+    if len(students) == 0:
+        print("No marks available!")
+    else:
+        total = sum(students.values())
+        average = total / len(students)
+        print("Average Marks:", average)
 
-    choice = input("Enter your choice (1-4): ")
+while True:
+    print("\n===== Student Marks Management =====")
+    print("1. Add Student")
+    print("2. Display All Students")
+    print("3. Search Student")
+    print("4. Calculate Average Marks")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
 
     if choice == "1":
-        print("Result:", add(num1, num2))
+        add_student()
 
     elif choice == "2":
-        print("Result:", subtract(num1, num2))
+        display_students()
 
     elif choice == "3":
-        print("Result:", multiply(num1, num2))
+        search_student()
 
     elif choice == "4":
-        print("Result:", divide(num1, num2))
+        calculate_average()
+
+    elif choice == "5":
+        print("Thank you!")
+        break
 
     else:
         print("Invalid choice!")
-
-except ValueError:
-    print("Please enter valid numbers!")
